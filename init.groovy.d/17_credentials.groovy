@@ -119,10 +119,10 @@ if (github_user && github_token && github_private_key) {
   }
 }
 
-def pipeline_token = env['JENKINS_GITHUB_PIPELINE_TOKEN']
+def pipeline_token = env['JENKINS_GITHUB_PIPELINE_DEFAULT_TOKEN']
 if (pipeline_token) {
 
-  def pwCredIdglob = "pipeline-library-token"
+  def pwCredIdglob = "pipeline-library-default-token"
   Credentials pwcglob = (Credentials) new UsernamePasswordCredentialsImpl(
     CredentialsScope.GLOBAL,
     pwCredIdglob,
@@ -131,6 +131,6 @@ if (pipeline_token) {
     pipeline_token
   )
 
-  println "Add Github token for pipeline library in GLOBAL scope"
+  println "Add Github Default token for pipeline library in GLOBAL scope"
   SystemCredentialsProvider.getInstance().getStore().addCredentials(Domain.global(), pwcglob)
 }
